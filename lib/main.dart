@@ -1,4 +1,4 @@
-import 'package:dindag/UI/home.dart';
+import 'package:dindag/ui/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
