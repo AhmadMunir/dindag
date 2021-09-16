@@ -1,3 +1,4 @@
+import 'package:dindag/ui/bae/event.dart';
 import 'package:dindag/ui/menu/laporan.dart';
 import 'package:dindag/ui/menu/perusahaan.dart';
 import 'package:dindag/ui/menu/tambah_laporan.dart';
@@ -345,7 +346,13 @@ class _HomeState extends State<Home> {
                           itemCount: 4,
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => Event(),
+                                  ),
+                                );
+                              },
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 5),
                                 width: MediaQuery.of(context).size.width * 0.3,
