@@ -1,15 +1,17 @@
-import 'package:dindag/ui/bae/event.dart';
-import 'package:dindag/ui/menu/laporan.dart';
-import 'package:dindag/ui/menu/perusahaan.dart';
-import 'package:dindag/ui/menu/tambah_laporan.dart';
+import 'package:dindag/screen/bae/event.dart';
+import 'package:dindag/screen/menu/laporan.dart';
+import 'package:dindag/screen/menu/perusahaan.dart';
+import 'package:dindag/screen/menu/tambah_laporan.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
+  static String id = 'HomeScreen';
+
   @override
-  _HomeState createState() => _HomeState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeScreenState extends State<HomeScreen> {
   List colors = [
     Colors.amber[200],
     Colors.blue[300],

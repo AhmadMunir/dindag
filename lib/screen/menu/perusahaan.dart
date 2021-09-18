@@ -1,12 +1,12 @@
-import 'package:dindag/ui/handling/empty_page.dart';
+import 'package:dindag/screen/handling/empty_page.dart';
 import 'package:flutter/material.dart';
 
-class TambahLaporan extends StatefulWidget {
+class Perusahaan extends StatefulWidget {
   @override
-  _TambahLaporanState createState() => _TambahLaporanState();
+  _PerusahaanState createState() => _PerusahaanState();
 }
 
-class _TambahLaporanState extends State<TambahLaporan> {
+class _PerusahaanState extends State<Perusahaan> {
   int data = 0;
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class _TambahLaporanState extends State<TambahLaporan> {
         child: Stack(
           children: [
             data == 0
-                ? EmptyPage("Laporan", context)
+                ? EmptyPage("Perusahaan", context)
                 :
                 //TODO: Add widget if data not empty
                 Container(

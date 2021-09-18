@@ -1,7 +1,7 @@
-import 'package:dindag/ui/bae/event.dart';
-import 'package:dindag/ui/handling/empty_page.dart';
-import 'package:dindag/ui/menu/perusahaan.dart';
-import 'package:dindag/ui/menu/tambah_laporan.dart';
+import 'package:dindag/screen/bae/event.dart';
+import 'package:dindag/screen/handling/empty_page.dart';
+import 'package:dindag/screen/menu/perusahaan.dart';
+import 'package:dindag/screen/menu/tambah_laporan.dart';
 import 'package:flutter/material.dart';
 
 class Laporan extends StatefulWidget {

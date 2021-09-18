@@ -1,4 +1,6 @@
-import 'package:dindag/ui/home.dart';
+import 'package:dindag/screen/home.dart';
+import 'package:dindag/screen/onboarding/onboarding_screen.dart';
+import 'package:dindag/shared/sharedPrev_manager.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,7 +25,24 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: FutureBuilder<bool>(
+        future: SharedPreferencesManager().isFreshInstalled(),
+        builder: (context, isFreshInstalledSnapshot) {
+          if (isFreshInstalledSnapshot.hasData) {
+            if (isFreshInstalledSnapshot.data == false) {
+              return HomeScreen();
+            } else {
+              //FreshInstall
+              print(isFreshInstalledSnapshot.data);
+              print("fresh installed");
+
+              return OnBoardingScreen();
+            }
+          } else {
+            return HomeScreen();
+          }
+        },
+      ),
     );
   }
 }
