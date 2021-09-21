@@ -1,3 +1,4 @@
+import 'package:dindag/screen/auth/auth_page.dart';
 import 'package:dindag/screen/home.dart';
 import 'package:dindag/screen/onboarding/onboarding_screen.dart';
 import 'package:dindag/shared/sharedPrev_manager.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         builder: (context, isFreshInstalledSnapshot) {
           if (isFreshInstalledSnapshot.hasData) {
             if (isFreshInstalledSnapshot.data == false) {
-              return HomeScreen();
+              return AuthPage();
             } else {
               //FreshInstall
               print(isFreshInstalledSnapshot.data);
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
               return OnBoardingScreen();
             }
           } else {
-            return HomeScreen();
+            // return HomeScreen();
+            return AuthPage();
           }
         },
       ),
