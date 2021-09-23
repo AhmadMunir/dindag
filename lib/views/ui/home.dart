@@ -1,17 +1,15 @@
-// import 'package:dindag/screen/bae/event_page.dart';
-// import 'package:dindag/screen/menu/report_page.dart';
-// import 'package:dindag/screen/menu/company_page.dart';
-// import 'package:dindag/screen/menu/addreport_page.dart';
+import 'bae/event.dart';
+import 'menu/laporan.dart';
+import 'menu/perusahaan.dart';
+import 'menu/tambah_laporan.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  static String id = 'HomeScreen';
-
+class Home extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeState createState() => _HomeState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeState extends State<Home> {
   List colors = [
     Colors.amber[200],
     Colors.blue[300],
@@ -28,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Container(
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -82,11 +81,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //     builder: (context) => Perusahaan(),
-                          //   ),
-                          // );
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => Perusahaan(),
+                            ),
+                          );
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.3,
@@ -117,11 +116,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //     builder: (context) => Laporan(),
-                          //   ),
-                          // );
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => Laporan(),
+                            ),
+                          );
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.3,
@@ -152,11 +151,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //     builder: (context) => TambahLaporan(),
-                          //   ),
-                          // );
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => TambahLaporan(),
+                            ),
+                          );
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.3,
@@ -349,11 +348,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(
                               onTap: () {
-                                // Navigator.of(context).push(
-                                //   MaterialPageRoute(
-                                //     builder: (context) => Event(),
-                                //   ),
-                                // );
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => Event(),
+                                  ),
+                                );
                               },
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 5),

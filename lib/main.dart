@@ -1,7 +1,9 @@
-import 'package:dindag/screen/auth/auth_page.dart';
-import 'package:dindag/screen/home.dart';
-import 'package:dindag/screen/onboarding/onboarding_screen.dart';
-import 'package:dindag/shared/sharedPrev_manager.dart';
+import 'package:dindag/bloc/blocs.dart';
+import 'package:dindag/tools/config.dart';
+import 'package:dindag/views/pages/main.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,42 +11,22 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: FutureBuilder<bool>(
-        future: SharedPreferencesManager().isFreshInstalled(),
-        builder: (context, isFreshInstalledSnapshot) {
-          if (isFreshInstalledSnapshot.hasData) {
-            if (isFreshInstalledSnapshot.data == false) {
-              return AuthPage();
-            } else {
-              //FreshInstall
-              print(isFreshInstalledSnapshot.data);
-              print("fresh installed");
-
-              return OnBoardingScreen();
-            }
-          } else {
-            // return HomeScreen();
-            return AuthPage();
-          }
-        },
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => ArticleBloc()..add(ArticleEvent())),
+        BlocProvider(create: (_) => EventBloc()..add(EventEvent())),
+        BlocProvider(create: (_) => AuthBloc()..add(CheckSession())),
+      ],
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          navigatorKey: naviKey,
+          theme: ThemeData(
+              scaffoldBackgroundColor: bgColor,
+              primarySwatch: Colors.blue,
+              textTheme: GoogleFonts.poppinsTextTheme()),
+          home: MainView()),
     );
   }
 }

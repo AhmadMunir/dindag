@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "100266854237",
+    "project_id": "ikm-dindag-lumajang",
+    "storage_bucket": "ikm-dindag-lumajang.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100266854237:android:aee1036c168a6d371c0ab4",
+        "android_client_info": {
+          "package_name": "com.dindag.ikm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100266854237-hf664q6hifpj9vjl1drehsri92gr3p76.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dindag.ikm",
+            "certificate_hash": "5f1278917f7dcd00432d5b7e89a8b96304cecc25"
+          }
+        },
+        {
+          "client_id": "100266854237-rbaha3rqsnrof5bfkabo0oi0natlpbdg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCths3Csnhr3IBNyKyFRUwO7IlQWEp21Ds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100266854237-rbaha3rqsnrof5bfkabo0oi0natlpbdg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
