@@ -1,8 +1,7 @@
 import 'package:dindag/views/pages/main.dart';
 
 import '../bae/event.dart';
-import '../menu/perusahaan.dart';
-import '../menu/tambah_laporan.dart';
+
 import 'package:flutter/material.dart';
 
 class Laporan extends StatefulWidget {

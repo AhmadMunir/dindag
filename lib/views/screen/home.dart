@@ -1,6 +1,5 @@
 import 'bae/event.dart';
-import 'menu/laporan.dart';
-import 'menu/perusahaan.dart';
+
 import 'menu/tambah_laporan.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.indigo[900],
-      // body: 
+      // body:
     );
   }
 }

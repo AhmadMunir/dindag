@@ -3,6 +3,7 @@ import 'package:dindag/models/models.dart';
 import 'package:dindag/tools/config.dart';
 import 'package:dindag/tools/navigate.dart';
 import 'package:dindag/views/pages/main.dart';
+import 'package:dindag/views/pages/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,8 +31,7 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _cardWidget(context,
-                      title: 'Perusahaan', target: CompanyPage()),
+                  _cardWidget(context, title: 'Perusahaan', target: CompanyPage()),
                   _cardWidget(context, title: 'Laporan', target: ReportPage()),
                   _cardWidget(
                     context,
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
               ),
           ],
         ),
-        preferredSize: Size(double.infinity, (user is UnauthenticatedUser) ? 130 :280),
+        preferredSize: Size(double.infinity, (user is UnauthenticatedUser) ? 130 : 280),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -57,15 +57,11 @@ class HomePage extends StatelessWidget {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Container(
-              child: BlocBuilder<bloc.ArticleBloc, bloc.ArticleState>(
-                  builder: (_, state) {
+              child: BlocBuilder<bloc.ArticleBloc, bloc.ArticleState>(builder: (_, state) {
                 return Column(
                   children: List.generate(
                     state.lists.length,
-                    (index) => articleCard(
-                        state.lists[index].image!,
-                        state.lists[index].title!,
-                        't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'),
+                    (index) => articleCard(state.lists[index].image!, state.lists[index].title!, 't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'),
                   ),
                 );
               }),
@@ -98,9 +94,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       ...List.generate(
                         state.lists.length,
-                        (index) => eventCard(
-                            "${state.lists[index].eventStarted!.day}",
-                            '${state.lists[index].title}'),
+                        (index) => eventCard("${state.lists[index].eventStarted!.day}", '${state.lists[index].title}'),
                       ),
                     ],
                   );
@@ -126,28 +120,21 @@ class HomePage extends StatelessWidget {
               style: TextStyle(fontSize: 24, color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            Text(title,
-                style: TextStyle(fontSize: 14, color: Colors.white),
-                textAlign: TextAlign.center),
+            Text(title, style: TextStyle(fontSize: 14, color: Colors.white), textAlign: TextAlign.center),
           ],
         ),
       ),
     );
   }
 
-  Widget articleCard(String image, String title, String descriptions,
-      {Function()? onTap}) {
+  Widget articleCard(String image, String title, String descriptions, {Function()? onTap}) {
     return InkWell(
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         child: Row(
           children: [
-            ClipPath.shape(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
-                child: Image.network(image,
-                    height: 100, width: 100, fit: BoxFit.cover)),
+            ClipPath.shape(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), child: Image.network(image, height: 100, width: 100, fit: BoxFit.cover)),
             SizedBox(
               width: 15,
             ),
@@ -211,9 +198,7 @@ class HomePage extends StatelessWidget {
   }
 
   Container _topbar(BuildContext context, User user) {
-    String name = (user is UnauthenticatedUser)
-        ? 'Masuk untuk \nexplore'
-        : 'Selamat Datang\n${user.name}';
+    String name = (user is UnauthenticatedUser) ? 'Masuk untuk \nexplore' : 'Selamat Datang\n${user.name}';
     return Container(
       padding: EdgeInsets.only(left: 20, right: 20),
       child: Row(
@@ -228,13 +213,19 @@ class HomePage extends StatelessWidget {
           InkWell(
             onTap: (user is UnauthenticatedUser)
                 ? () async {
-                    User? user = await Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => AuthPage()));
+                    User? user = await Navigator.push(context, MaterialPageRoute(builder: (_) => AuthPage()));
                     if (user != null) {
                       context.read<bloc.AuthBloc>().add(bloc.CheckSession());
                     }
                   }
-                : () {},
+                : () {
+                    Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                        builder: (context) => ProfilePage(),
+                      ),
+                    );
+                  },
             child: CircleAvatar(
               radius: 30,
               backgroundImage: AssetImage("assets/img/default/avatar.png"),
