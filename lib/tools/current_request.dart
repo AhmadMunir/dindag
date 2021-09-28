@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:http/http.dart' as http;
 
 class CurrentRequest {
@@ -24,37 +22,44 @@ class CurrentRequest {
 
   Future<http.Response> postRequest(
     String url, {
+
     /// requested data
     Map<String, String>? data,
+
     /// requested headers
     Map<String, String>? headers,
+
     /// requested file {"key":"path of image"}
     Map<String, String>? file,
   }) async {
     final req = _request(Uri.parse(url), RMethod.POST);
     req.fields.addAll(data!);
 
-    if (file != null && file.isNotEmpty) {
+    if (file!.isNotEmpty) {
       file.forEach((key, value) async {
         req.files.add(await http.MultipartFile.fromPath(key, value));
       });
     }
 
-    req.headers.addAll(headers!);
+    if (headers!.isNotEmpty) {
+      req.headers.addAll(headers);
+    }
 
     return http.Response.fromStream(await req.send());
   }
 
-
   Future<http.Response> getRequest(
-      String url, {
-        /// requested data
-        Map<String, String>? data,
-        /// requested headers
-        Map<String, String>? headers,
-        /// requested file {"key":"path of image"}
-        Map<String, String>? file,
-      }) async {
+    String url, {
+
+    /// requested data
+    Map<String, String>? data,
+
+    /// requested headers
+    Map<String, String>? headers,
+
+    /// requested file {"key":"path of image"}
+    Map<String, String>? file,
+  }) async {
     final req = _request(Uri.parse(url), RMethod.GET);
 
     print(headers);
@@ -65,22 +70,23 @@ class CurrentRequest {
   }
 
   Future<http.Response> deleteRequest(
-      String url, {
-        /// requested data
-        Map<String, String>? data,
-        /// requested headers
-        Map<String, String>? headers,
-        /// requested file {"key":"path of image"}
-        Map<String, String>? file,
-      }) async {
+    String url, {
+
+    /// requested data
+    Map<String, String>? data,
+
+    /// requested headers
+    Map<String, String>? headers,
+
+    /// requested file {"key":"path of image"}
+    Map<String, String>? file,
+  }) async {
     final req = _request(Uri.parse(url), RMethod.DELETE);
 
     req.headers.addAll(headers!);
 
     return http.Response.fromStream(await req.send());
   }
-
 }
-
 
 enum RMethod { POST, GET, DELETE }

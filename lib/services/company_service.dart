@@ -18,7 +18,7 @@ class CompanyService {
   Future<config.CurrentResponse<List<model.Company>>> getAll() async {
     try {
       final _res = await config.CurrentRequest(client).getRequest(_url, headers: {
-        'Authorization':'Bearer ${service.AuthService(this.client).getToken()}'
+        'Authorization':'Bearer ${await service.AuthService(this.client).getToken()}'
       });
 
       if (_res.statusCode != 200) {

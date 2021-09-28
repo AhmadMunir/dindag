@@ -12,16 +12,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class AuthPage extends StatelessWidget {
-  final TextEditingController email = TextEditingController();
-  final TextEditingController password = TextEditingController();
+class AuthPage extends StatefulWidget {
 
   AuthPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    bool isLogin = true;
+  _AuthPageState createState() => _AuthPageState();
+}
 
+class _AuthPageState extends State<AuthPage> {
+  final TextEditingController email = TextEditingController();
+
+  final TextEditingController password = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     // final _email = TextEditingController();
     // final _password = TextEditingController();
 
@@ -100,7 +105,7 @@ class AuthPage extends StatelessWidget {
                             ),
                             CurrentButton(
                               onTap: () async {
-                                context.read<AuthBloc>().add(SignIn(
+                                BlocProvider.of<AuthBloc>(context).add(SignIn(
                                     email.text.trim(), password.text.trim()));
                                 // BlocProvider<AuthBloc>.of(context).
                                 // // Navigate.push(HomePage());
@@ -130,8 +135,16 @@ class AuthPage extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       ),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigate.push(RegisterPage());
+                                        ..onTap = () async {
+                                          final _email = await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      RegisterPage()));
+
+                                                      if (_email != null) {
+                                                        email.text = _email;
+                                                      }
                                         },
                                     ),
                                   ],

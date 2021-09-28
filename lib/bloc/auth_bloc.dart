@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:dindag/bloc/blocs.dart';
 import 'package:dindag/models/models.dart';
 import 'package:dindag/services/auth_service.dart';
+import 'package:dindag/tools/config.dart';
 import 'package:dindag/tools/current_response.dart';
 import 'package:meta/meta.dart';
 
@@ -19,7 +21,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<CheckSession>((event, emit) async {
       final CurrentResponse<User> cuser = await AuthService(http.Client()).account();
-      emit(cuser.status! ? AuthLoggedIn(cuser.data!) : AuthInitial(message: ''));
+      emit(cuser.status! ? AuthLoggedIn(cuser.data!) : AuthInitial());
+    });
+
+    on<SignOut>((event, emit) async {
+      await AuthService(http.Client()).removeToken();
+      emit(AuthInitial(message: 'Berhasil Logout,'));
+    });
+    
+    on<SignUp>((event, emit) async {
+      final _res = await AuthService(http.Client()).signup(event.user, event.file!);
+      emit(AuthInitial(message: "${_res.status}-${removeException(_res.message!)}"));
     });
   }
 }

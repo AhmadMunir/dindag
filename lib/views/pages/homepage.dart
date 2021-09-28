@@ -3,7 +3,7 @@ import 'package:dindag/models/models.dart';
 import 'package:dindag/tools/config.dart';
 import 'package:dindag/tools/navigate.dart';
 import 'package:dindag/views/pages/main.dart';
-import 'package:dindag/views/pages/profile/profile_page.dart';
+import 'package:dindag/views/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -66,18 +66,6 @@ class HomePage extends StatelessWidget {
                 );
               }),
             ),
-            // articleCard(
-            //     dummyImage,
-            //     "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,",
-            //     't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'),
-            // articleCard(
-            //     dummyImage,
-            //     "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,",
-            //     't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'),
-            // articleCard(
-            //     dummyImage,
-            //     "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,",
-            //     't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'),
             Text(
               'Event',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -134,7 +122,11 @@ class HomePage extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         child: Row(
           children: [
-            ClipPath.shape(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), child: Image.network(image, height: 100, width: 100, fit: BoxFit.cover)),
+            ClipPath.shape(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+                child: Image.network(dummyImage,
+                    height: 100, width: 100, fit: BoxFit.cover)),
             SizedBox(
               width: 15,
             ),
@@ -170,9 +162,10 @@ class HomePage extends StatelessWidget {
       child: widget.Card(
         color: Colors.indigo[800],
         width: MediaQuery.of(context).size.width / 3.5,
+        height: MediaQuery.of(context).size.width / 3.5,
         child: Column(
           //TODO: Temporary, until the image is available
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             //TODO: Add Image
             Icon(
@@ -187,7 +180,7 @@ class HomePage extends StatelessWidget {
               title ?? "-",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 13,
+                fontSize: 12,
               ),
               textAlign: TextAlign.center,
             ),
@@ -219,13 +212,8 @@ class HomePage extends StatelessWidget {
                     }
                   }
                 : () {
-                    Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
-                      ),
-                    );
-                  },
+                  Navigate.push(ProfilePage());
+                },
             child: CircleAvatar(
               radius: 30,
               backgroundImage: AssetImage("assets/img/default/avatar.png"),

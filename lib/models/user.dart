@@ -13,6 +13,7 @@ class User {
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
+    this.password, 
   });
 
   final String? id;
@@ -24,6 +25,7 @@ class User {
   final String? cardId;
   final String? role;
   final String? profileImage;
+  final String? password;
   final dynamic emailVerifiedAt;
   final dynamic createdAt;
   final dynamic updatedAt;
@@ -46,13 +48,13 @@ class User {
   );
 
   Map<String, String> toJson() => {
-    "id": id == null ? '' : id!,
-    "name": name == null ? '' : name!,
-    "email": email == null ? '' : email!,
-    "phone_number": phoneNumber == null ? '' : phoneNumber!,
-    "whatsapp": whatsapp == null ? '' : whatsapp!,
-    "addresses": addresses == null ? '' : addresses!,
-    "card_id": cardId == null ? '' : cardId!,
+    "name": name ?? '',
+    "password": password ?? '',
+    "email": email ?? '',
+    "phone_number": phoneNumber ?? '',
+    "whatsapp": whatsapp ?? '',
+    "addresses": addresses ?? '',
+    "card_id": cardId ?? '',
   };
 }
 

@@ -1,6 +1,12 @@
+import 'package:dindag/bloc/blocs.dart';
+import 'package:dindag/models/models.dart';
+import 'package:dindag/views/pages/company/create_company.dart';
 import 'package:dindag/views/pages/main.dart';
-import 'package:dindag/views/screen/menu/addcompany_page.dart';
+import 'package:dindag/views/widgets/loading_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../widgets/widgets.dart' as widget;
+import '../../tools/config.dart' as config;
 
 class CompanyPage extends StatelessWidget {
   const CompanyPage({Key? key}) : super(key: key);
@@ -8,116 +14,61 @@ class CompanyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          "Data Perusahaan",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: Colors.black,
+        appBar: widget.appBar(title: 'Perusahaan'),
+        bottomNavigationBar: Container(
+          margin: const EdgeInsets.all(20),
+          child: CurrentButton(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => CreateCompany()));
+            },
+            title: Text('Tambah Perusahaan'),
           ),
         ),
-        leadingWidth: 0,
-        actions: [
-          Padding(
-            padding: EdgeInsets.all(5),
-            child: Icon(
-              Icons.more_vert,
-              color: Colors.black,
-            ),
-          )
-        ],
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // EmptyPage('testing', context),
-            ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10, bottom: index == 9 ? 60 : 0),
-                  child: Card(
-                    elevation: 5,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Perusahaan A",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
+        body: BlocListener<CompanyBloc, CompanyState>(
+          listener: (context, state) {
+            if (state is CompanyError) {
+              print(state.message);
+              config.showFlushbar(context, message: state.message);
+            }
+          },
+          child: BlocBuilder<CompanyBloc, CompanyState>(
+            builder: (context, state) {
+              return LoadingState(
+                  child: state.lists.isEmpty
+                      ? EmptyPage('Perusahaanmu', context)
+                      : ListView(
+                          padding: const EdgeInsets.all(20),
+                          children: [
+                            ...List.generate(
+                              state.lists.length,
+                              (index) => companyCard(state.lists[index]),
                             ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                width: MediaQuery.of(context).size.height * 0.2,
-                                child: Text(
-                                  "Jl. Raya Ajung, Ajung, Jember",
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.height * 0.2,
-                                child: Text(
-                                  "0823433433433",
-                                  textAlign: TextAlign.right,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
+                          ],
+                        ));
+            },
+          ),
+        ));
+  }
 
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                      builder: (context) => AddCompanyPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.all(13),
-                  color: Colors.indigo[800],
-                  child: Text(
-                    "TAMBAH DATA",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
+  Widget companyCard(Company company) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        child: widget.Card(
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  company.name!,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-              ),
-            )
-          ],
-        ),
+                Text("${company.contactPhone!} - ${company.contactName!}"),
+                Text(
+                    "${company.address == null ? '-' : company.address!.city!}"),
+              ],
+            )),
       ),
     );
   }

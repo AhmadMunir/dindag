@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ArticleBloc()..add(ArticleEvent())),
         BlocProvider(create: (_) => EventBloc()..add(EventEvent())),
         BlocProvider(create: (_) => AuthBloc()..add(CheckSession())),
+        BlocProvider(create: (_) => CompanyBloc()..add(CompanyEvent())),
       ],
       child: MaterialApp(
           title: 'Flutter Demo',

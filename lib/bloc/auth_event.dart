@@ -11,3 +11,12 @@ class SignIn extends AuthEvent {
 }
 
 class CheckSession extends AuthEvent {}
+
+class SignOut extends AuthEvent {}
+
+class SignUp extends AuthEvent {
+  final User user;
+  final Map<String, String>? file;
+
+  SignUp(this.user, {this.file});
+}

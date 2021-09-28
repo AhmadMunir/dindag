@@ -1,161 +1,89 @@
+import 'package:dindag/bloc/blocs.dart';
+import 'package:dindag/models/models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../widgets/widgets.dart' as widget;
 
-class ReportPage extends StatelessWidget {
+class ReportPage extends StatefulWidget {
   const ReportPage({Key? key}) : super(key: key);
 
   @override
+  _ReportPageState createState() => _ReportPageState();
+}
+
+class _ReportPageState extends State<ReportPage> {
+  Company? company;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                // showBackDialog(context);
-              },
-              icon: Icon(Icons.arrow_back)),
-          iconTheme: IconThemeData(color: Colors.black),
-          elevation: 0,
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          title: Text(
-            'Tulis Laporan',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-        backgroundColor: Colors.purple[50],
+        appBar: widget.appBar(title: 'Laporan'),
         body: SafeArea(
-          child: Container(),
-          // child: Stack(
-          //   children: [
-          //     data == 0
-          //         ? EmptyPage("Laporan", context)
-          //         :
-          //         //TODO: Add widget if data not empty
-          //         //Start of Menu Item
+          child: ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              BlocBuilder<CompanyBloc, CompanyState>(
+                builder: (context, state) {
 
-          //         Column(
-          //             mainAxisAlignment: MainAxisAlignment.start,
-          //             crossAxisAlignment: CrossAxisAlignment.center,
-          //             children: [
-          //               SizedBox(
-          //                 height: 20,
-          //               ),
-          //               Container(
-          //                 width: MediaQuery.of(context).size.width,
-          //                 padding: EdgeInsets.only(
-          //                   left: 20,
-          //                   right: 20,
-          //                 ),
-          //                 child: Text(
-          //                   "Progress",
-          //                   style: TextStyle(
-          //                     color: Colors.grey,
-          //                     fontSize: 18,
-          //                   ),
-          //                 ),
-          //               ),
-          //               SizedBox(
-          //                 height: 10,
-          //               ),
-          //               Padding(
-          //                 padding: EdgeInsets.only(left: 10, right: 10),
-          //                 child: Container(
-          //                   height: 300,
-          //                   child: ListView.builder(
-          //                     scrollDirection: Axis.horizontal,
-          //                     itemCount: 3,
-          //                     itemBuilder: (BuildContext context, int index) {
-          //                       int progress =
-          //                           (progressValue[index] * 100).toInt();
-          //                       return GestureDetector(
-          //                         onTap: () {
-          //                           Navigator.of(context).push(
-          //                             MaterialPageRoute(
-          //                               builder: (context) => Event(),
-          //                             ),
-          //                           );
-          //                         },
-          //                         child: Column(
-          //                           children: [
-          //                             Container(
-          //                               margin: EdgeInsets.only(
-          //                                   right: 5, bottom: 8),
-          //                               width: 150,
-          //                               height: 150,
-          //                               padding: EdgeInsets.all(15),
-          //                               decoration: BoxDecoration(
-          //                                 color: Colors.white,
-          //                                 borderRadius: BorderRadius.all(
-          //                                   Radius.circular(10),
-          //                                 ),
-          //                               ),
-          //                               child: Stack(
-          //                                 children: [
-          //                                   Align(
-          //                                     alignment: Alignment.center,
-          //                                     child: SizedBox(
-          //                                       height: 80,
-          //                                       width: 80,
-          //                                       child:
-          //                                           CircularProgressIndicator(
-          //                                         color: Colors.indigo,
-          //                                         strokeWidth: 10,
-          //                                         value: progressValue[index],
-          //                                       ),
-          //                                     ),
-          //                                   ),
-          //                                   Align(
-          //                                     alignment: Alignment.center,
-          //                                     child: Text(
-          //                                       "$progress %",
-          //                                       style: TextStyle(
-          //                                         color: Colors.indigo,
-          //                                         fontSize: 20,
-          //                                       ),
-          //                                     ),
-          //                                   ),
-          //                                 ],
-          //                               ),
-          //                             ),
-          //                             Container(
-          //                               margin: EdgeInsets.only(right: 5),
-          //                               width: 150,
-          //                               child: Text(
-          //                                 progressName[index],
-          //                                 textAlign: TextAlign.center,
-          //                                 style: TextStyle(
-          //                                   color: Colors.indigo,
-          //                                   fontWeight: FontWeight.bold,
-          //                                 ),
-          //                               ),
-          //                             )
-          //                           ],
-          //                         ),
-          //                       );
-          //                     },
-          //                   ),
-          //                 ),
-          //               )
-          //             ],
-          //           ),
-          //     //End of Menu Item,
-          //     Align(
-          //       alignment: Alignment.bottomCenter,
-          //       child: Container(
-          //         width: MediaQuery.of(context).size.width,
-          //         padding: EdgeInsets.all(13),
-          //         color: Colors.indigo[800],
-          //         child: Text(
-          //           "TAMBAH DATA",
-          //           textAlign: TextAlign.center,
-          //           style: TextStyle(
-          //             color: Colors.white,
-          //             fontSize: 18,
-          //           ),
-          //         ),
-          //       ),
-          //     )
-          //   ],
-          // ),
+                  if (company == null) {
+                    company = state.lists.isEmpty ? null : state.lists.first;
+                  }
+                  return widget.Card(
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Text(
+                          'Pilih Perusahaan',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  cardProgress(),
+                  cardProgress(),
+                  cardProgress(),
+                ],
+              ),
+              Container(),
+            ],
+          ),
         ));
+  }
+
+  widget.Card cardProgress() {
+    return widget.Card(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 70,
+              width: 70,
+              child: CircularProgressIndicator(
+                color: Colors.indigo,
+                strokeWidth: 10,
+                backgroundColor: Colors.indigo.withOpacity(0.20),
+                value: 45 / 100,
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              'Total Nilai\nProduksi',
+              style: TextStyle(fontSize: 16),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
