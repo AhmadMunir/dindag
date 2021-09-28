@@ -19,8 +19,7 @@ class CompanyPage extends StatelessWidget {
           margin: const EdgeInsets.all(20),
           child: CurrentButton(
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => CreateCompany()));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => CreateCompany()));
             },
             title: Text('Tambah Perusahaan'),
           ),
@@ -65,8 +64,7 @@ class CompanyPage extends StatelessWidget {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 Text("${company.contactPhone!} - ${company.contactName!}"),
-                Text(
-                    "${company.address == null ? '-' : company.address!.city!}"),
+                Text("${company.address == null ? '-' : company.address!.city!}"),
               ],
             )),
       ),
