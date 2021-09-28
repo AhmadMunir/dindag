@@ -4,6 +4,7 @@ import 'package:dindag/tools/config.dart';
 import 'package:dindag/tools/navigate.dart';
 import 'package:dindag/views/pages/main.dart';
 import 'package:dindag/views/pages/profile_page.dart';
+import 'package:dindag/views/screen/company/detailcompany_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,7 +33,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _cardWidget(context, title: 'Perusahaan', target: CompanyPage()),
-                  _cardWidget(context, title: 'Laporan', target: ReportPage()),
+                  _cardWidget(context, title: 'Laporan', target: DetailCompanyPage(company: null)),
                   _cardWidget(
                     context,
                     title: 'Buat Laporan',
@@ -122,11 +123,7 @@ class HomePage extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         child: Row(
           children: [
-            ClipPath.shape(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
-                child: Image.network(dummyImage,
-                    height: 100, width: 100, fit: BoxFit.cover)),
+            ClipPath.shape(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), child: Image.network(dummyImage, height: 100, width: 100, fit: BoxFit.cover)),
             SizedBox(
               width: 15,
             ),
@@ -212,8 +209,8 @@ class HomePage extends StatelessWidget {
                     }
                   }
                 : () {
-                  Navigate.push(ProfilePage());
-                },
+                    Navigate.push(ProfilePage());
+                  },
             child: CircleAvatar(
               radius: 30,
               backgroundImage: AssetImage("assets/img/default/avatar.png"),

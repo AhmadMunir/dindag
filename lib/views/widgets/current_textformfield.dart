@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CurrentTextFormField extends StatelessWidget {
-  const CurrentTextFormField({Key? key, required this.focusNode, required this.labelText, required this.keyboardKey, required this.formKey, required this.nextNode}) : super(key: key);
+  const CurrentTextFormField({Key? key, required this.focusNode, required this.labelText, required this.keyboardKey, required this.formKey, required this.nextNode, this.value = ""}) : super(key: key);
 
   final FocusNode? focusNode;
   final String? labelText;
+  final String value;
   final TextInputType? keyboardKey;
   final GlobalKey<FormState> formKey;
   final FocusNode? nextNode;
