@@ -188,21 +188,69 @@ class _DetailCompanyPageState extends State<DetailCompanyPage> with TickerProvid
                       physics: BouncingScrollPhysics(),
                       itemCount: 10,
                       itemBuilder: (context, index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          margin: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          child: Column(
-                            children: [
-                              _itemDetailCompany("Nama Lisensi", "NPWP (Nomor Pokok Wajib Pajak)"),
-                              _itemDetailCompany("Penyedia Agensi", "DJP Jember"),
-                            ],
-                          ),
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            index == 0
+                                ? InkWell(
+                                    enableFeedback: true,
+                                    onTap: () {},
+                                    child: Card(
+                                      elevation: 2,
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(10),
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.add,
+                                              color: Colors.black,
+                                            ),
+                                            Text(
+                                              "Tambah Lisensi",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: 0,
+                                    width: 0,
+                                  ),
+                            Card(
+                              elevation: 2,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                                margin: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+                                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                child: Column(
+                                  children: [
+                                    _itemDetailCompany("Nama Lisensi", "NPWP (Nomor Pokok Wajib Pajak)"),
+                                    _itemDetailCompany("Penyedia Agensi", "DJP Jember"),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
                         );
                       },
                     ),
