@@ -1,5 +1,6 @@
 import 'package:dindag/bloc/blocs.dart' as bloc;
 import 'package:dindag/models/models.dart';
+import 'package:dindag/screen/bae/news_page.dart';
 import 'package:dindag/tools/config.dart';
 import 'package:dindag/tools/navigate.dart';
 import 'package:dindag/views/pages/main.dart';
@@ -58,14 +59,27 @@ class HomePage extends StatelessWidget {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Container(
-              child: BlocBuilder<bloc.ArticleBloc, bloc.ArticleState>(builder: (_, state) {
-                return Column(
-                  children: List.generate(
-                    state.lists.length,
-                    (index) => articleCard(state.lists[index].image!, state.lists[index].title!, 't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'),
-                  ),
-                );
-              }),
+              child: BlocBuilder<bloc.ArticleBloc, bloc.ArticleState>(
+                builder: (_, state) {
+                  return Column(
+                    children: List.generate(
+                      state.lists.length,
+                      (index) => articleCard(
+                        state.lists[index].image!,
+                        state.lists[index].title!,
+                        't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => NewsPage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
             Text(
               'Event',
@@ -83,7 +97,10 @@ class HomePage extends StatelessWidget {
                     children: [
                       ...List.generate(
                         state.lists.length,
-                        (index) => eventCard("${state.lists[index].eventStarted!.day}", '${state.lists[index].title}'),
+                        (index) => eventCard(
+                          "${state.lists[index].eventStarted!.day}",
+                          '${state.lists[index].title}',
+                        ),
                       ),
                     ],
                   );
@@ -109,7 +126,11 @@ class HomePage extends StatelessWidget {
               style: TextStyle(fontSize: 24, color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            Text(title, style: TextStyle(fontSize: 14, color: Colors.white), textAlign: TextAlign.center),
+            Text(
+              title,
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),
@@ -118,36 +139,38 @@ class HomePage extends StatelessWidget {
 
   Widget articleCard(String image, String title, String descriptions, {Function()? onTap}) {
     return InkWell(
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        child: Row(
-          children: [
-            ClipPath.shape(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), child: Image.network(dummyImage, height: 100, width: 100, fit: BoxFit.cover)),
-            SizedBox(
-              width: 15,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    maxLines: 2,
+        onTap: onTap,
+        child: Card(
+          elevation: 4,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              children: [
+                ClipPath.shape(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), child: Image.network(dummyImage, height: 100, width: 100, fit: BoxFit.cover)),
+                SizedBox(
+                  width: 15,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        maxLines: 2,
+                      ),
+                      Text(
+                        descriptions,
+                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                        maxLines: 3,
+                      ),
+                    ],
                   ),
-                  Text(
-                    descriptions,
-                    style: TextStyle(fontSize: 14, color: Colors.black54),
-                    maxLines: 3,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 
   Widget _cardWidget(BuildContext context, {String? title, Widget? target}) {
