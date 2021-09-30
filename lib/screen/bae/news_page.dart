@@ -1,3 +1,4 @@
+import 'package:dindag/views/widgets/widgets.dart' as widget;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -5,28 +6,15 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
+      appBar: widget.appBar(
+        title: "Artikel",
         actions: [
           Container(
-            padding: EdgeInsets.only(left: 20),
-            child: Container(
-              padding: EdgeInsets.only(right: 20),
-              child: Icon(
-                Icons.share,
-                color: Colors.black,
-              ),
+            margin: EdgeInsets.only(right: 20),
+            child: Icon(
+              Icons.share,
             ),
-          ),
+          )
         ],
       ),
       backgroundColor: Colors.white,

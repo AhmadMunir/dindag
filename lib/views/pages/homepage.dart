@@ -1,5 +1,6 @@
 import 'package:dindag/bloc/blocs.dart' as bloc;
 import 'package:dindag/models/models.dart';
+import 'package:dindag/screen/bae/event_page.dart';
 import 'package:dindag/screen/bae/news_page.dart';
 import 'package:dindag/tools/config.dart';
 import 'package:dindag/tools/navigate.dart';
@@ -100,6 +101,13 @@ class HomePage extends StatelessWidget {
                         (index) => eventCard(
                           "${state.lists[index].eventStarted!.day}",
                           '${state.lists[index].title}',
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => EventPage(title: '${state.lists[index].title}'),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -113,25 +121,28 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget eventCard(String date, String title) {
-    return Container(
-      margin: const EdgeInsets.only(right: 10),
-      child: widget.Card(
-        height: 100,
-        width: 100,
-        child: Column(
-          children: [
-            Text(
-              date,
-              style: TextStyle(fontSize: 24, color: Colors.white),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              title,
-              style: TextStyle(fontSize: 14, color: Colors.white),
-              textAlign: TextAlign.center,
-            ),
-          ],
+  Widget eventCard(String date, String title, {Function()? onTap}) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(right: 10),
+        child: widget.Card(
+          height: 100,
+          width: 100,
+          child: Column(
+            children: [
+              Text(
+                date,
+                style: TextStyle(fontSize: 24, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                title,
+                style: TextStyle(fontSize: 14, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );
