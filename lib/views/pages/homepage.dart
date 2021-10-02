@@ -5,6 +5,8 @@ import 'package:dindag/screen/bae/news_page.dart';
 import 'package:dindag/tools/config.dart';
 import 'package:dindag/tools/navigate.dart';
 import 'package:dindag/views/pages/main.dart';
+
+import 'package:dindag/views/pages/notification_page.dart/notification_page.dart';
 import 'package:dindag/views/pages/profile_page.dart';
 import 'package:dindag/views/screen/company/detailcompany_page.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +37,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _cardWidget(context, title: 'Perusahaan', target: CompanyPage()),
-                  _cardWidget(context, title: 'Laporan', target: DetailCompanyPage(company: null)),
+                  _cardWidget(context, title: 'Laporan', target: NotificationPage()),
                   _cardWidget(
                     context,
                     title: 'Buat Laporan',
