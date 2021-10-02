@@ -43,55 +43,9 @@ class _NotificationPageState extends State<NotificationPage> with TickerProvider
         ],
       ),
       body: SafeArea(
-        child: ListView(
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 30,
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    child: TabBar(
-                      unselectedLabelColor: Colors.grey,
-                      labelColor: Colors.blue,
-                      controller: tabController,
-                      tabs: [
-                        Tab(
-                          text: "Direct",
-                        ),
-                        Tab(
-                          text: "Overall",
-                        ),
-                      ],
-                    ),
-                  ),
-                  TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Make all as read",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                        ),
-                      ))
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 50),
-              height: MediaQuery.of(context).size.height * 0.9,
-              child: TabBarView(
-                controller: tabController,
-                children: [
-                  listNotification(context, notificationModels),
-                  listNotification(context, notificationModels),
-                ],
-              ),
-            ),
-          ],
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: listNotification(context, notificationModels),
         ),
       ),
     );
