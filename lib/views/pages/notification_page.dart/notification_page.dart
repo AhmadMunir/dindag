@@ -80,90 +80,106 @@ class _NotificationPageState extends State<NotificationPage> with TickerProvider
                     itemBuilder: (context, ind) {
                       return Container(
                         padding: EdgeInsets.symmetric(vertical: 5),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
+                        child: ListView(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
                           children: [
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: CircleAvatar(
-                                      radius: 20,
-                                      backgroundImage: AssetImage(
-                                        notificationModels[index].notificationBodyModels[ind].imgPath,
-                                      ),
-                                    ),
-                                  ),
-                                  notificationModels[index].notificationBodyModels[ind].isRead
-                                      ? Container(
-                                          height: 0,
-                                          width: 0,
-                                        )
-                                      : Align(
-                                          alignment: Alignment.topLeft,
-                                          child: Icon(
-                                            Icons.fiber_manual_record,
-                                            color: Colors.indigo,
-                                            size: 15,
-                                          ),
-                                        ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    notificationModels[index].notificationBodyModels[ind].notification,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width * 0.15,
+                                  padding: EdgeInsets.all(5),
+                                  child: Stack(
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 5,
-                                          vertical: 0.5,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey,
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(5),
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: CircleAvatar(
+                                          radius: 20,
+                                          backgroundImage: AssetImage(
+                                            notificationModels[index].notificationBodyModels[ind].imgPath,
                                           ),
                                         ),
-                                        child: Text(
-                                          notificationModels[index].notificationBodyModels[ind].type,
+                                      ),
+                                      notificationModels[index].notificationBodyModels[ind].isRead
+                                          ? Container(
+                                              height: 0,
+                                              width: 0,
+                                            )
+                                          : Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Icon(
+                                                Icons.fiber_manual_record,
+                                                color: Colors.indigo,
+                                                size: 15,
+                                              ),
+                                            ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width * 0.75,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        notificationModels[index].notificationBodyModels[ind].notification,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: Colors.black,
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 10,
+                                        height: 10,
                                       ),
-                                      Text(
-                                        notificationModels[index].notificationBodyModels[ind].time,
-                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 10,
+                                              vertical: 0.5,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(8),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              notificationModels[index].notificationBodyModels[ind].type,
+                                              style: TextStyle(fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            notificationModels[index].notificationBodyModels[ind].time,
+                                          ),
+                                        ],
+                                      )
                                     ],
-                                  )
-                                ],
-                              ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Divider(
+                              thickness: 1,
+                              color: Colors.indigo[200],
                             )
                           ],
                         ),

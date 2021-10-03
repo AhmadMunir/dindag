@@ -30,7 +30,7 @@ List<NotificationModels> getDummyModels() {
         NotificationBodyModels(
           false,
           "assets/img/default/avatar.png",
-          "Mia post new videos",
+          "Mia post new videos, Mia post new videos, Mia post new videos, Mia post new videos, ",
           "FA-1",
           "2 hour ago",
         ),
